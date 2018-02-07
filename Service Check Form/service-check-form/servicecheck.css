@@ -1,0 +1,26 @@
+.sample-form {
+    padding: 20px;
+}
+
+.sample-form .title {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.sample-form .description {
+    font-size: 18px;
+}
+
+.sample-form .form-id {
+    color: blue;
+}
+
+.panel-body__text
+{
+  display: flex;  
+}
+
+.panel-body__content{
+    display: flex;
+    flex-direction: column;
+}

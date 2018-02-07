@@ -1,0 +1,9 @@
+{
+  "forms": [{
+    "formId": "ba63b4d7-04b7-449c-9cfe-6c1dcf91c9d2",
+    "formName": "servicecheck",
+    "title": "servicecheck",
+    "serviceUrl": "http://172.21.246.158:2727/api/checkservice/",
+    "version": "0.0.0"
+  }]
+}

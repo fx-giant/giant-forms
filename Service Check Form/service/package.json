@@ -1,0 +1,17 @@
+{
+  "name": "servicecheck",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "description": "giant java service checking ",
+  "author": {
+    "name": "YQ"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "debug": "^2.2.0",
+    "express": "^4.14.0"
+  }
+}

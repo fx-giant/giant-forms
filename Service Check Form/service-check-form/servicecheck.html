@@ -1,0 +1,130 @@
+<div class="servicecheck-form">
+	<div class="jumbotron text-center">
+		<h1>This is GIANT JAVA services health checking form</h1>
+
+		<p class=' description'>This form's id is
+			<span class=' form-id' data-bind='text:formId'></span>
+		</p>
+
+	</div>
+
+	<div class="container">
+		<div class="panel-group">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Service Checking</div>
+				<div class="panel-body">
+					<pre class="panel-body__content">
+						<!--<div class="panel-body__label">Host</div>
+						<div class="panel-body__text">
+							<input type="text" data-bind="value: host"/>
+						</div>
+
+						<div class="panel-body__label">Port</div>
+						<div class="panel-body__text">
+							<input type="text" data-bind="value: port"/>
+						</div>-->
+
+						<div class="panel-body__label">Ping Or Config</div>
+						<div class="panel-body__text">
+							<input type="text" data-bind="value: pingOrConfig"/>
+						</div>
+
+						<div class="panel-body__label">Is show Detail ?</div>
+						<div class="panel-body__text">
+							<input type="checkbox" data-bind="checked: isd"/>
+						</div>
+					</pre>
+					<div class="btn btn-primary" data-bind="click:executeGetAll">Execute</div>
+					<h4>Response:</h4>
+					<!--ko foreach: getAllResponse -->
+					<div class="panel-body__label" data-bind="text:serviceName"></div>
+					<pre data-bind="text:response"></pre>
+					<!-- /ko-->					
+				</div>
+			</div>
+		</div>
+		<!--<div class="panel-group">
+			<div class="panel panel-primary">
+				<div class="panel-heading">GET</div>
+				<div class="panel-body">
+					<pre>
+function executeGet() {
+	formRecordApi.get(koFormId(), "12345678-1234-1234-1234-123456781234", {
+		success: function (response) {
+			koGetResponse(response);
+		}
+	})
+}
+					</pre>
+					<div class="btn btn-primary" data-bind="click:executeGet">Execute</div>
+					<h4>Response:</h4>
+					<pre data-bind="text:getResponse"></pre>
+				</div>
+			</div>
+		</div>
+		<div class="panel-group">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Post</div>
+				<div class="panel-body">
+					<pre>
+function executePost() {
+	formRecordApi.post(koFormId(), {
+		"name": "Giant Form Sandbox",
+		"address": "http://fusionexgiant.com"
+	}, {
+		success: function () {
+			koPostResponse("Post Success!");
+		}
+	})
+}
+					</pre>
+					<div class="btn btn-primary" data-bind="click:executePost">Execute</div>
+					<h4>Response:</h4>
+					<pre data-bind="text:postResponse"></pre>
+				</div>
+			</div>
+		</div>
+		<div class="panel-group">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Put</div>
+				<div class="panel-body">
+					<pre>
+function executePut() {
+	formRecordApi.put(koFormId(), "12345678-1234-1234-1234-123456781234", {
+		"name": "Giant Form Sandbox",
+		"address": "http://fusionexgiant.com"
+	}, {
+		success: function () {
+			koPutResponse("Put Success!");
+		}
+	})
+}
+					</pre>
+					<div class="btn btn-primary" data-bind="click:executePut">Execute</div>
+					<h4>Response:</h4>
+					<pre data-bind="text:putResponse"></pre>
+				</div>
+			</div>
+		</div>
+		<div class="panel-group">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Delete</div>
+				<div class="panel-body">
+					<pre>
+function executeDelete() {
+	formRecordApi.delete(koFormId(), "12345678-1234-1234-1234-123456781234", {
+		success: function () {
+			koDeleteResponse("Delete Success!");
+		}
+	})
+}
+					</pre>
+					<div class="btn btn-primary" data-bind="click:executeDelete">Execute</div>
+					<h4>Response:</h4>
+					<pre data-bind="text:deleteResponse"></pre>
+				</div>
+			</div>
+		</div>-->
+	</div>
+
+</div>
