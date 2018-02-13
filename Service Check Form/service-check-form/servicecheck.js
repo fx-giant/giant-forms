@@ -13,6 +13,9 @@ namespace("fx.giantFormDesign")["servicecheck"] = (function () {
 		var modelNeedCheck=["auditServiceUrl","dataAccessServiceUrl","dataManipulationServiceUrl","dataSearchServiceUrl","dataSemanticServiceUrl","jobServiceUrl","logServiceUrl","messagingServiceUrl","modernizeDataAccessServiceUrl","resourceManagementServiceUrl","modernizeDataManipulationServiceUrl"];
 		var serviceCheckResonses=[];
 
+
+		executeGetAll();
+
 		function executeGetAll() {
 
 			serviceCheckResonses=[];
@@ -76,6 +79,13 @@ namespace("fx.giantFormDesign")["servicecheck"] = (function () {
 					serviceCheckResonse.response=generateResponseString(response);
 					serviceCheckResonses.push(serviceCheckResonse);	
 					koGetAllResponse(serviceCheckResonses);
+				},
+				fail: function (response){
+					var serviceCheckResonse= {};
+					serviceCheckResonse.serviceName=service.name;
+					serviceCheckResonse.response=response.statusText;
+					serviceCheckResonses.unshift(serviceCheckResonse);	
+					koGetAllResponse(serviceCheckResonses);
 				}
 			})
 		}
@@ -84,7 +94,6 @@ namespace("fx.giantFormDesign")["servicecheck"] = (function () {
 		function generateResponseString(response)
 		{
 			var responseString="";
-
 			if(isJson(response[0].response))			
 			{
 				var jsonObj=JSON.parse(response[0].response);
