@@ -33,12 +33,23 @@
 						<div class="panel-body__text">
 							<input type="checkbox" data-bind="checked: isd"/>
 						</div>
+
+						<div class="panel-body__label">Auto refresh seconds</div>
+						<div class="panel-body__text">
+							<input type="number" data-bind="value: timer"/>
+						</div>
 					</pre>
 					<div class="btn btn-primary" data-bind="click:executeGetAll">Execute</div>
 					<h4>Response:</h4>
 					<!--ko foreach: getAllResponse -->
+					<!--ko if: isHealth -->
 					<div class="panel-body__label" data-bind="text:serviceName"></div>
 					<pre data-bind="text:response"></pre>
+					<!-- /ko-->
+					<!--ko ifnot: isHealth -->
+					<div class="panel-body__label" data-bind="text:serviceName"></div>
+					<pre data-bind="text:response" style="color:red"></pre>
+					<!-- /ko-->
 					<!-- /ko-->					
 				</div>
 			</div>

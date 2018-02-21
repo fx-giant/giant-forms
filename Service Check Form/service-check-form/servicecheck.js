@@ -9,12 +9,14 @@ namespace("fx.giantFormDesign")["servicecheck"] = (function () {
 		var koFormId = params.formId;
 		var koGetAllResponse = observable();
 		var koPingOrConfig=observable("ping");
+		var koTimer=observable(10);
 		var koIsD=observable(false);
 		var modelNeedCheck=["auditServiceUrl","dataAccessServiceUrl","dataManipulationServiceUrl","dataSearchServiceUrl","dataSemanticServiceUrl","jobServiceUrl","logServiceUrl","messagingServiceUrl","modernizeDataAccessServiceUrl","resourceManagementServiceUrl","modernizeDataManipulationServiceUrl"];
 		var serviceCheckResonses=[];
-
+		var currentRefreshInterval=null;
 
 		executeGetAll();
+		setInterval(executeGetAll,koTimer()*1000)
 
 		function executeGetAll() {
 
@@ -50,11 +52,13 @@ namespace("fx.giantFormDesign")["servicecheck"] = (function () {
 			
 		}
 
-		function fail(){
+		function fail(jqXhr,textStatus,error,event){
+			event.isPreventDefault=true;
 			responseString="service error";
 			var serviceCheckResonse= {};
 					serviceCheckResonse.serviceName=service.none;
 					serviceCheckResonse.response=responseString;
+					serviceCheckResonse.isHealth=false;
 					serviceCheckResonses.push(serviceCheckResonse);
 			koGetAllResponse(serviceCheckResonses);
 		}
@@ -78,12 +82,15 @@ namespace("fx.giantFormDesign")["servicecheck"] = (function () {
 					serviceCheckResonse.serviceName=service.name;
 					serviceCheckResonse.response=generateResponseString(response);
 					serviceCheckResonses.push(serviceCheckResonse);	
+					serviceCheckResonse.isHealth=true;
 					koGetAllResponse(serviceCheckResonses);
 				},
-				fail: function (response){
+				fail: function (jqXhr,textStatus,error,event){
+					event.isPreventDefault=true;
 					var serviceCheckResonse= {};
 					serviceCheckResonse.serviceName=service.name;
-					serviceCheckResonse.response=response.statusText;
+					serviceCheckResonse.response=error;
+					serviceCheckResonse.isHealth=false;
 					serviceCheckResonses.unshift(serviceCheckResonse);	
 					koGetAllResponse(serviceCheckResonses);
 				}
@@ -131,6 +138,19 @@ namespace("fx.giantFormDesign")["servicecheck"] = (function () {
 			return hostname;
 		}
 
+		koTimer.subscribe(function(newValue){
+			if(!newValue){
+				clearInterval(currentRefreshInterval);
+				return;
+			}
+
+			if(currentRefreshInterval)
+			clearInterval(currentRefreshInterval);
+
+			currentRefreshInterval=setInterval(executeGetAll,newValue*1000);
+
+		});
+
 		var me = this;
 		$.extend(me, {
 			formId: koFormId,
@@ -138,6 +158,7 @@ namespace("fx.giantFormDesign")["servicecheck"] = (function () {
 			getAllResponse: koGetAllResponse,
 			pingOrConfig: koPingOrConfig,
 			isd:koIsD,
+			timer:koTimer,
 
 
 			executeGetAll: executeGetAll
