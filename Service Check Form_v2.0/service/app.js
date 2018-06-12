@@ -463,7 +463,7 @@ function checkLoggingElasticsearchConnection(data) {
         var elasticsearchStorageModule = _.find(data, function (model) {
             return model.dType == "elasticsearchStorageModule";
         });
-        var moduleName = "Index " + checkTypes.elasticsearch;
+        var moduleName = "Logging " + checkTypes.elasticsearch;
 
         var host = elasticsearchStorageModule.indexMetadata.serverName;
         var port = 9200;

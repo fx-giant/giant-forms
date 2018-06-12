@@ -26,29 +26,28 @@ namespace("fx.giantFormDesign")["servicecheck"] = (function () {
 
 			formRecordApi.getAll(koFormId(), options, {
 				success: function (response) {
-					serviceCheckResonses=[];
-					
+					serviceCheckResonses = [];
+
 					for (var service in response) {
 
-						if(_.isArray(response[service]))
-						{
-							var javaServices=response[service][0];
+						if (_.isArray(response[service])) {
+							var javaServices = response[service][0];
 							for (var javaService in javaServices) {
 								var serviceCheckResonse = {};
 								serviceCheckResonse.serviceName = javaServices[javaService].serviceName;
-								serviceCheckResonse.response = javaServices[javaService].response;
+								serviceCheckResonse.response = generateResponseString(javaServices[javaService].response);
 								serviceCheckResonse.isHealth = javaServices[javaService].isHealth;
 								if (serviceCheckResonse.isHealth)
 									serviceCheckResonses.push(serviceCheckResonse);
 								else
 									serviceCheckResonses.unshift(serviceCheckResonse);
-		
+
 							}
 						}
-						else{
+						else {
 							var serviceCheckResonse = {};
 							serviceCheckResonse.serviceName = response[service].serviceName;
-							serviceCheckResonse.response = response[service].response;
+							serviceCheckResonse.response = generateResponseString(response[service].response);
 							serviceCheckResonse.isHealth = response[service].isHealth;
 							if (serviceCheckResonse.isHealth)
 								serviceCheckResonses.push(serviceCheckResonse);
@@ -73,25 +72,15 @@ namespace("fx.giantFormDesign")["servicecheck"] = (function () {
 
 		function generateResponseString(response) {
 			var responseString = "";
-			if (isJson(response[0].response)) {
-				var jsonObj = JSON.parse(response[0].response);
-				responseString = JSON.stringify(jsonObj, null, 4);
+			if (_.isString(response)) {
+				responseString = response;
+
 			}
 			else {
-				responseString = response[0].response;
+				responseString = JSON.stringify(response, null, 4);
 			}
 
 			return responseString;
-		}
-
-		function isJson(value) {
-			try {
-				JSON.parse(value);
-			}
-			catch (e) {
-				return false;
-			}
-			return true;
 		}
 
 		koTimer.subscribe(function (newValue) {
