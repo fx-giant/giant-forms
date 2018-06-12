@@ -7,9 +7,11 @@ This form have two parts:
 2. **From** A GIANT form use for show the service check result.
 
 ## How to use
-1. **Pull down the request doker images** 
+1. **Build Docker Image** 
+  Go to service folder
+
 ```bash
-docker -- pull gcr.io/fx-giant-container/service-check/service:latest
+docker build -t service:latest .
 ```
 2. **Run Service**
 ```bash

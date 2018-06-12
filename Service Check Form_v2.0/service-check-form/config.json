@@ -1,9 +1,0 @@
-{
-  "forms": [{
-    "formId": "b6d3b0f9-bda4-45b7-9efd-5d74acbd2416",
-    "formName": "servicecheck",
-    "title": "servicecheck",
-    "serviceUrl": "http://172.16.53.141:3000/api/healthCheck/",
-    "version": "0.0.0"
-  }]
-}
